@@ -16,7 +16,7 @@ func logFatal(err error) {
 }
 
 func main() {
-	// fmt.Println("test client")
+
 	connection, err := net.Dial("tcp", "localhost:8080")
 	logFatal(err)
 
