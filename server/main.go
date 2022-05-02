@@ -1,7 +1,10 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"bufio"
+=======
+>>>>>>> 50b1a39 (initial commit)
 	"fmt"
 	"log"
 	"net"
@@ -13,6 +16,7 @@ func logFatal(err error) {
 	}
 }
 
+<<<<<<< HEAD
 var (
 	openConnections = make(map[net.Conn]bool)
 	newConnection   = make(chan net.Conn)
@@ -21,11 +25,19 @@ var (
 
 func main() {
 	// fmt.Println("test server")
+=======
+var openConnections = make(map[net.Conn]bool)
+var newConnection = make(chan net.Conn)
+
+func main() {
+	fmt.Println("test server")
+>>>>>>> 50b1a39 (initial commit)
 	ln, err := net.Listen("tcp", ":8080")
 	logFatal(err)
 
 	defer ln.Close()
 
+<<<<<<< HEAD
 	go func() {
 		for {
 			conn, err := ln.Accept()
@@ -81,4 +93,6 @@ func main() {
 		deadConnection <- conn 
 	}
  
+=======
+>>>>>>> 50b1a39 (initial commit)
 }
