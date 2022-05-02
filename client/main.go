@@ -1,7 +1,6 @@
 package main
 
 import (
-<<<<<<< HEAD
 	"bufio"
 	"fmt"
 	"log"
@@ -34,12 +33,5 @@ func main() {
 	helloMSG := fmt.Sprintf("Hello %s\n", name)
 
 	connection.Write([]byte(helloMSG))
-=======
-	"fmt"
-)
 
-func main() {
-	fmt.Println("test client")
-
->>>>>>> 50b1a39 (initial commit)
 }
