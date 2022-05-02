@@ -36,14 +36,49 @@ func main() {
 		}
 	}()
 
-	connection := <-newConnection
+	// connection := <-newConnection
 
-	reader := bufio.NewReader(connection)
+	// reader := bufio.NewReader(connection)
 
-	message, err := reader.ReadString('\n')
+	// message, err := reader.ReadString('\n')
 
-	logFatal(err)
+	// logFatal(err)
 
-	fmt.Println(message)
+	// fmt.Println(message)
 
+
+	for {
+		select {
+		case conn := <-newConnection:
+			go broadcastMessage(conn)
+		case conn := <- deadConnection:
+			for item := range openConnections {
+				if item == conn {
+					break
+				}
+			}
+
+			delete(openConnections, conn)
+		}
+	}
+
+	func broadcastMessage(conn net.Conn) {
+		for {
+			reader := bufio.NewReader(conn)
+			message, err := reader.ReadString('\n')
+
+			if err != nil {
+				break
+			}
+
+			for item := range openConnections {
+				if item != conn {
+					item.Write([]byte(message))
+				}
+			}
+		}
+
+		deadConnection <- conn 
+	}
+ 
 }
